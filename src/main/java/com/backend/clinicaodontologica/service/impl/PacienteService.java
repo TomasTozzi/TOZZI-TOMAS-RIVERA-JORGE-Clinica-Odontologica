@@ -23,10 +23,6 @@ public class PacienteService implements IPacienteService {
     private IDao<Paciente> pacienteIDao;
     private ModelMapper modelMapper;
 
-    public PacienteService() {
-
-    }
-
     public PacienteService(IDao<Paciente> pacienteIDao, ModelMapper modelMapper) {
         this.pacienteIDao = pacienteIDao;
         this.modelMapper = modelMapper;
