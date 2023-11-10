@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.backend</groupId>
+	<groupId>com.projectoIntegrador.clinicaOdontologica</groupId>
 	<artifactId>clinica-odontologica</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>clinica-odontologica</name>
