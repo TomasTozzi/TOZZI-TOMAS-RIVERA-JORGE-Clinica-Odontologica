@@ -1,7 +1,9 @@
 package com.clinicaOdontologica.service.impl;
 
 import com.clinicaOdontologica.dao.IDao;
+import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
 import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
+import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.model.Odontologo;
 import com.clinicaOdontologica.model.Paciente;
@@ -10,13 +12,13 @@ import com.clinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OdontologoService implements IOdontologoService {
-
-    private IDao<Odontologo> odontologoIDao;
     private final Logger LOGGER = LoggerFactory.getLogger(OdontologoService.class);
+    private IDao<Odontologo> odontologoIDao;
     private ModelMapper modelMapper;
 
 
@@ -27,7 +29,6 @@ public class OdontologoService implements IOdontologoService {
     }
 
     public OdontologoService() {
-
     }
     public OdontologoService(IDao<Odontologo> odontologoIDao) {
         this.odontologoIDao = odontologoIDao;
@@ -64,7 +65,7 @@ public class OdontologoService implements IOdontologoService {
         //mandamos a persistir a la capa dao y obtenemos una entidad
         Odontologo odontologoAPersistir = odontologoIDao.registrar(odontologoEntidad);
         //transformamos la entidad obtenida en salidaDto
-        PacienteSalidaDto pacienteSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
+        OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
         LOGGER.info("OdontologoSalidaDto: " + JsonPrinter.toString(odontologoSalidaDto));
         return odontologoSalidaDto;
     }
@@ -76,8 +77,8 @@ public class OdontologoService implements IOdontologoService {
                     .toList();
 
 
-            LOGGER.info("Listado de todos los odontologos: {}", odontologosSalidaDtos);
-            return odontologosSalidaDtos;
+            LOGGER.info("Listado de todos los odontologos: {}", odontologosSalidaDto);
+            return odontologosSalidaDto;
         }
 
 

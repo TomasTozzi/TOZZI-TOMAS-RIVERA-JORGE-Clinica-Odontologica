@@ -1,7 +1,5 @@
 package com.clinicaOdontologica.service.impl;
 
-
-
 import com.clinicaOdontologica.dao.IDao;
 import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
@@ -17,12 +15,9 @@ import java.util.List;
 
 @Service
 public class PacienteService implements IPacienteService {
-
     private final Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
-
     private IDao<Paciente> pacienteIDao;
     private ModelMapper modelMapper;
-
 
     public PacienteService(IDao<Paciente> pacienteIDao, ModelMapper modelMapper) {
         this.pacienteIDao = pacienteIDao;
@@ -31,7 +26,6 @@ public class PacienteService implements IPacienteService {
     }
 
     public PacienteService() {
-
     }
 
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente){

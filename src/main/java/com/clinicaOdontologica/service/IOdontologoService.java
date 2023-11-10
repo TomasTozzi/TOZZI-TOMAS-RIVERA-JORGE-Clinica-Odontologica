@@ -1,9 +1,8 @@
 package com.clinicaOdontologica.service;
 
-import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
-import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
+import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.clinicaOdontologica.model.Odontologo;
-import com.clinicaOdontologica.model.Paciente;
 
 import java.util.List;
 
@@ -14,4 +13,4 @@ public interface IOdontologoService {
         OdontologoSalidaDto buscarOdontologoPorId(int id);
         Odontologo actualizarOdontologo(Odontologo odontologo);
     }
-}
+
