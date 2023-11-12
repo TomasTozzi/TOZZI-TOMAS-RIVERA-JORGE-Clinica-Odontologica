@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
-
     private IPacienteService pacienteService;
 
     public PacienteController(IPacienteService pacienteService) {
@@ -26,7 +25,6 @@ public class PacienteController {
     public ResponseEntity<PacienteSalidaDto> registrarPaciente(@RequestBody @Valid PacienteEntradaDto paciente){
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
-
 
     //GET
     @GetMapping("{id}")

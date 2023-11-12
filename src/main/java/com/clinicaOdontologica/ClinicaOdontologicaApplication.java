@@ -25,16 +25,17 @@ public class ClinicaOdontologicaApplication {
 		SpringApplication.run(ClinicaOdontologicaApplication.class, args);
 		crearTabla();
 		logger.info("ClinicaOdontologica is now running...");
+		appOpen();
 	}
 
 	//JR. este metodo muestra el return y el logger al levantar la app con el endpoint vacio.
 	@GetMapping()
-	public String appRunning(){
+	public static String appRunning(){
 		logger.info("ejecutando el GetMapping ...");
 		return "clinica Odontologica is Running";
 	}
 	@GetMapping("/open")
-	public String appOpen(){
+	public static String appOpen(){
 		logger.info("ejecutando el GetMapping 2 ...");
 		return "clinica Odontologica is open";
 	}
@@ -44,20 +45,10 @@ public class ClinicaOdontologicaApplication {
 		return "clinica Odontologica is Closed";
 	}
 
-
-
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
-
-
-
-
-
-
-
-
 
 	//Metodo de creacion de tabla que se ejecuta dentro del main.
 	private static void crearTabla(){
@@ -79,6 +70,4 @@ public class ClinicaOdontologicaApplication {
 			}
 		}
 	}
-
-
 }
