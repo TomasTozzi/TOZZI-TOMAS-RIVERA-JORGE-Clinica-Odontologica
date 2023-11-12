@@ -25,8 +25,7 @@ public class PacienteService implements IPacienteService {
         configureMapping();
     }
 
-    public PacienteService() {
-    }
+    public PacienteService() {}
 
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente){
         //convertimos mediante el mapper de dtoEntrada a entidad
@@ -85,6 +84,4 @@ public class PacienteService implements IPacienteService {
                 .addMappings(modelMapper -> modelMapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilioSalidaDto));
 
     }
-
-
 }
