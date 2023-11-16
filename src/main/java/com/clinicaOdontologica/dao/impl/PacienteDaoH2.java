@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class PacienteDaoH2 implements IDao<Paciente> {
 
@@ -24,7 +25,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
         Connection connection = null;
         Paciente pacienteRegistrado = null;
 
-        try{
+        try {
             connection = H2Connection.getConnection();
             connection.setAutoCommit(false);
 
@@ -42,14 +43,14 @@ public class PacienteDaoH2 implements IDao<Paciente> {
             pacienteRegistrado = new Paciente(paciente.getNombre(), paciente.getApellido(), paciente.getDni(), paciente.getFechaIngreso(), domicilioRegistrado);
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 pacienteRegistrado.setId(resultSet.getInt("id"));
             }
 
             connection.commit();
             LOGGER.info("Se ha registrado el paciente: " + pacienteRegistrado);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
             if (connection != null) {
@@ -80,13 +81,13 @@ public class PacienteDaoH2 implements IDao<Paciente> {
         Connection connection = null;
         List<Paciente> pacientes = new ArrayList<>();
 
-        try{
+        try {
 
             connection = H2Connection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PACIENTES");
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Paciente paciente = crearObjetoPaciente(resultSet);
                 pacientes.add(paciente);
             }
@@ -115,27 +116,26 @@ public class PacienteDaoH2 implements IDao<Paciente> {
         Connection connection = null;
         Paciente paciente = null;
 
-        try{
+        try {
             connection = H2Connection.getConnection();
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM PACIENTES WHERE ID = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 paciente = crearObjetoPaciente(rs);
             }
 
-            if(paciente == null) LOGGER.error("No se ha encontrado el paciente con id: " + id);
+            if (paciente == null) LOGGER.error("No se ha encontrado el paciente con id: " + id);
             else LOGGER.info("Se ha encontrado el paciente: " + paciente);
 
 
-
-        } catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
         } finally {
             try {
                 connection.close();
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 LOGGER.error("Ha ocurrido un error al intentar cerrar la bdd. " + ex.getMessage());
                 ex.printStackTrace();
             }
@@ -154,7 +154,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
             connection.setAutoCommit(false);
 
             PreparedStatement ps = connection.prepareStatement("UPDATE PACIENTES SET NOMBRE = ?, APELLIDO = ?, DNI = ?, FECHA = ?, DOMICILIO_ID = ? WHERE ID = ?");
-            ps.setString(1,pacienteModificado.getNombre());
+            ps.setString(1, pacienteModificado.getNombre());
             ps.setString(2, pacienteModificado.getApellido());
             ps.setInt(3, pacienteModificado.getDni());
             ps.setDate(4, Date.valueOf(pacienteModificado.getFechaIngreso()));
@@ -174,14 +174,13 @@ public class PacienteDaoH2 implements IDao<Paciente> {
         } finally {
             try {
                 connection.close();
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 LOGGER.error("Ha ocurrido un error al intentar cerrar la bdd. " + ex.getMessage());
                 ex.printStackTrace();
             }
         }
         return pacienteModificado;
     }
-
 
 
     private Paciente crearObjetoPaciente(ResultSet resultSet) throws SQLException {

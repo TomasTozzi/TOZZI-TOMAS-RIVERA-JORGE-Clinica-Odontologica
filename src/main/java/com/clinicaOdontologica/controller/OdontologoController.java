@@ -16,27 +16,30 @@ import java.util.List;
 public class OdontologoController {
     private IOdontologoService odontologoService;
 
-    public OdontologoController(IOdontologoService odontologoService){this.odontologoService = odontologoService;}
+    public OdontologoController(IOdontologoService odontologoService) {
+        this.odontologoService = odontologoService;
+    }
+
     @PostMapping("/registrar")
-    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo){
+    public ResponseEntity<OdontologoSalidaDto> registrarOdontologo(@RequestBody @Valid OdontologoEntradaDto odontologo) {
         return new ResponseEntity<>(odontologoService.registrarOdontologo(odontologo), HttpStatus.CREATED);
     }
 
 
     //GET
     @GetMapping("{id}")
-    public ResponseEntity<OdontologoSalidaDto> obtenerOdontologoPorId(@PathVariable int id){
+    public ResponseEntity<OdontologoSalidaDto> obtenerOdontologoPorId(@PathVariable int id) {
         return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<OdontologoSalidaDto>> listarPacientes(){
+    public ResponseEntity<List<OdontologoSalidaDto>> listarPacientes() {
         return new ResponseEntity<>(odontologoService.listarOdontologos(), HttpStatus.OK);
     }
 
     //PUT
     @PutMapping("/actualizar")
-    public Odontologo actualizarOdontologo(@RequestBody Odontologo odontologo){
+    public Odontologo actualizarOdontologo(@RequestBody Odontologo odontologo) {
         return odontologoService.actualizarOdontologo(odontologo);
     }
 }
