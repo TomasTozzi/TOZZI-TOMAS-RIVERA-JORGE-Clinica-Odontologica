@@ -1,8 +1,8 @@
 package com.clinicaOdontologica.controller;
 
 import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.clinicaOdontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
-import com.clinicaOdontologica.model.Odontologo;
 import com.clinicaOdontologica.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class OdontologoController {
 
     //GET
     @GetMapping("{id}")
-    public ResponseEntity<OdontologoSalidaDto> obtenerOdontologoPorId(@PathVariable int id) {
+    public ResponseEntity<OdontologoSalidaDto> obtenerOdontologoPorId(@PathVariable Long id) {
         return new ResponseEntity<>(odontologoService.buscarOdontologoPorId(id), HttpStatus.OK);
     }
 
@@ -39,7 +39,7 @@ public class OdontologoController {
 
     //PUT
     @PutMapping("/actualizar")
-    public Odontologo actualizarOdontologo(@RequestBody Odontologo odontologo) {
+    public OdontologoSalidaDto actualizarOdontologo(@RequestBody OdontologoModificacionEntradaDto odontologo) {
         return odontologoService.actualizarOdontologo(odontologo);
     }
 }

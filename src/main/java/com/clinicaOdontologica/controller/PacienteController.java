@@ -1,8 +1,8 @@
 package com.clinicaOdontologica.controller;
 
 import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
+import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
-import com.clinicaOdontologica.model.Paciente;
 import com.clinicaOdontologica.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
+
     private IPacienteService pacienteService;
 
     public PacienteController(IPacienteService pacienteService) {
@@ -26,9 +27,10 @@ public class PacienteController {
         return new ResponseEntity<>(pacienteService.registrarPaciente(paciente), HttpStatus.CREATED);
     }
 
+
     //GET
     @GetMapping("{id}")
-    public ResponseEntity<PacienteSalidaDto> obtenerPacientePorId(@PathVariable int id) {
+    public ResponseEntity<PacienteSalidaDto> obtenerPacientePorId(@PathVariable Long id) {
         return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
     }
 
@@ -39,7 +41,14 @@ public class PacienteController {
 
     //PUT
     @PutMapping("/actualizar")
-    public Paciente actualizarPaciente(@RequestBody Paciente paciente) {
+    public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) {
         return pacienteService.actualizarPaciente(paciente);
+    }
+
+    //DELETE
+    @DeleteMapping("eliminar/{id}")
+    public ResponseEntity<?> eliminarPaciente(@PathVariable Long id) {
+        pacienteService.eliminarPaciente(id);
+        return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.OK);
     }
 }

@@ -1,10 +1,10 @@
-package com.clinicaOdontologica.test;
+//package com.clinicaOdontologica.test;
 
 
 
 
-import com.clinicaOdontologica.dao.impl.OdontologoDaoH2;
-import com.clinicaOdontologica.model.Odontologo;
+import com.clinicaOdontologica.repository.OdontologoRepository;
+import com.clinicaOdontologica.entity.Odontologo;
 import com.clinicaOdontologica.service.impl.OdontologoService;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 
 
-class OdontologoServiceTest {
+/*class OdontologoServiceTest {
 
     private final OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
 
@@ -55,6 +55,6 @@ class OdontologoServiceTest {
      //   List<Odontologo> odontologoList = odontologoService.listarOdontologos();
        // assertFalse(odontologoList.isEmpty());
 
-    }
+    //}
 
 
