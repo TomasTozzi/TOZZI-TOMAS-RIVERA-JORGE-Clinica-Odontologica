@@ -12,12 +12,12 @@ public interface ITurnoService {
 
     List<TurnoSalidaDto> listarTurnos();
 
-    TurnoSalidaDto buscarTurnoPorId(Long id);
+    TurnoSalidaDto buscarTurnoPorId(long id);
 
     TurnoSalidaDto actualizarTurno(TurnoModificacionEntradaDto turno);
 
     void eliminarTurno(Long id);
 
-    TurnoSalidaDto buscarTurnoPorDni(int dni);
-
+    //metodo equivalente a busqueda por otro parametro.
+    //TurnoSalidaDto buscarTurnoPorId(Long id);
 }

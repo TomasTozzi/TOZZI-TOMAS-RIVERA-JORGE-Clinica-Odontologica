@@ -2,9 +2,13 @@ package com.clinicaOdontologica.service.impl;
 
 
 import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.OdontologoModificacionEntradaDto;
+import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.entity.Odontologo;
+import com.clinicaOdontologica.entity.Paciente;
 import com.clinicaOdontologica.repository.OdontologoRepository;
 import com.clinicaOdontologica.service.IOdontologoService;
 import com.clinicaOdontologica.utils.JsonPrinter;
@@ -105,5 +109,12 @@ public class OdontologoService implements IOdontologoService {
         return modelMapper.map(odontologoRepository.findByDni(dni), OdontologoSalidaDto.class);
     }
 
+
+    private void configureMapping() {
+        modelMapper.typeMap(OdontologoEntradaDto.class, Odontologo.class);
+        modelMapper.typeMap(Odontologo.class, OdontologoSalidaDto.class);
+        modelMapper.typeMap(OdontologoModificacionEntradaDto.class, Odontologo.class);
+
+    }
 
 }
