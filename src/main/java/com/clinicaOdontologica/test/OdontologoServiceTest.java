@@ -1,21 +1,6 @@
 //package com.clinicaOdontologica.test;
 
 
-
-
-import com.clinicaOdontologica.repository.OdontologoRepository;
-import com.clinicaOdontologica.entity.Odontologo;
-import com.clinicaOdontologica.service.impl.OdontologoService;
-import org.junit.Test;
-
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-
-
-
 /*class OdontologoServiceTest {
 
     private final OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
@@ -50,11 +35,11 @@ import static org.junit.Assert.assertTrue;
 
     } */
 
-   // @Test
-   // public void listarTodosLosOdontologos() {
-     //   List<Odontologo> odontologoList = odontologoService.listarOdontologos();
-       // assertFalse(odontologoList.isEmpty());
+// @Test
+// public void listarTodosLosOdontologos() {
+//   List<Odontologo> odontologoList = odontologoService.listarOdontologos();
+// assertFalse(odontologoList.isEmpty());
 
-    //}
+//}
 
 

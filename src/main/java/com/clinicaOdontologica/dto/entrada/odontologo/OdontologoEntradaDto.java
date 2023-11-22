@@ -1,13 +1,8 @@
 package com.clinicaOdontologica.dto.entrada.odontologo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.validation.Valid;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 
 public class OdontologoEntradaDto {
 

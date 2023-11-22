@@ -1,12 +1,8 @@
 package com.clinicaOdontologica.test;
 
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-
 class PacienteServiceTest {
-   // private PacienteService pacienteService = new PacienteService(new PacienteDaoH2());
+    // private PacienteService pacienteService = new PacienteService(new PacienteDaoH2());
 
     /*
 

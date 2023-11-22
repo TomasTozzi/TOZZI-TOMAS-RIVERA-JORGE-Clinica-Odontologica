@@ -1,9 +1,5 @@
 package com.clinicaOdontologica.dto.salida.odontologo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 public class OdontologoSalidaDto {
 
     private int id;
