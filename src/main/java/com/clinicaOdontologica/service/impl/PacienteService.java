@@ -96,11 +96,6 @@ public class PacienteService implements IPacienteService {
         } else {
             LOGGER.error("No se ha encontrado el paciente con id {}", id);
             throw new ResourceNotFoundException("No se ha encontrado el paciente con id: " + id);
-
-
-
-
-            //excepcion a lanzar aqui
         }
 
     }

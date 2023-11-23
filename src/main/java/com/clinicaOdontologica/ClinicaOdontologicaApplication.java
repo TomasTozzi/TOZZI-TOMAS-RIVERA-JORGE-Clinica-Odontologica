@@ -21,7 +21,7 @@ public class ClinicaOdontologicaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ClinicaOdontologicaApplication.class, args);
-        crearTabla();
+        //crearTabla();
         logger.info("ClinicaOdontologica is now running...");
         appOpen();
     }
@@ -40,7 +40,7 @@ public class ClinicaOdontologicaApplication {
     }
 
     //Metodo de creacion de tabla que se ejecuta dentro del main.
-    private static void crearTabla() {
+ /*   private static void crearTabla() {
         Connection connection = null;
         try {
             Class.forName("org.h2.Driver");
@@ -59,7 +59,7 @@ public class ClinicaOdontologicaApplication {
             }
         }
     }
-
+*/
     @GetMapping("/close")
     public String appClosed() {
         logger.info("ejecutando el GetMapping 3 ...");

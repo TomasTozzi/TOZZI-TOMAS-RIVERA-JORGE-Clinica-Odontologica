@@ -7,15 +7,18 @@ import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.dto.salida.turno.TurnoSalidaDto;
 import com.clinicaOdontologica.entity.Paciente;
 import com.clinicaOdontologica.entity.Turno;
+import com.clinicaOdontologica.exepciones.BadRequestException;
+import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
 import com.clinicaOdontologica.repository.TurnoRepository;
 import com.clinicaOdontologica.service.ITurnoService;
 import com.clinicaOdontologica.utils.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class TurnoService implements ITurnoService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(TurnoService.class);
@@ -34,14 +37,28 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) {
-        LOGGER.info("TurnoEntradaDto: " + JsonPrinter.toString(turno));
-        Turno turnoEntidad = modelMapper.map(turno, Turno.class);
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException{
+        TurnoSalidaDto turnoSalida = null;
 
-        Turno turnoAPersistir = turnoRepository.save(turnoEntidad);
-        TurnoSalidaDto turnoSalidaDto = modelMapper.map(turnoAPersistir, TurnoSalidaDto.class);
-        LOGGER.info("TurnoSalidaDto: " + JsonPrinter.toString(turnoSalidaDto));
-        return turnoSalidaDto;
+        if (true) {
+            //Tengo una fecha valida, la asigno a un variable.
+            //tengo un id de paciente => findById(id de paciente) => asignas a la variable => pacienteSalidaDto
+            //tengo un id de Odontologo => findById(id de odontologo) => asignas a la variable => OdontologoSalidaDto
+
+            // fecha  + pacienteSalida + OdontologoSalida = registrarTurno
+
+            LOGGER.info("TurnoEntradaDto: " + JsonPrinter.toString(turno));
+
+            Turno turnoEntidad = modelMapper.map(turno, Turno.class);
+            Turno turnoAPersistir = turnoRepository.save(turnoEntidad);
+             turnoSalida = modelMapper.map(turnoAPersistir, TurnoSalidaDto.class);
+
+        } else {
+            LOGGER.info("Hubo un problema al registrar el turno: "  + JsonPrinter.toString(turnoSalida));
+            throw new BadRequestException("El paciento y/o el Odontologo no existen..");
+        }
+
+        return turnoSalida;
     }
 
     @Override
@@ -52,7 +69,7 @@ public class TurnoService implements ITurnoService {
                 .toList();
 
         if (LOGGER.isInfoEnabled())
-            LOGGER.info("Listado de todos los pacientes: {}", JsonPrinter.toString(turnosSalidaDto));
+            LOGGER.info("Listado de todos los turnos: {}", JsonPrinter.toString(turnosSalidaDto));
         return turnosSalidaDto;
     }
 
@@ -78,13 +95,13 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public void eliminarTurno(Long id) {
+    public void eliminarTurno(Long id) throws ResourceNotFoundException {
         if (turnoRepository.findById(id).orElse(null) != null) {
             turnoRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el paciente con id: {}.", id);
         } else {
             LOGGER.error("No se ha encontrado el paciente con id {}", id);
-            //excepcion a lanzar aqui
+            throw new ResourceNotFoundException("No se ha encontrado el turno con id : " + id);
         }
     }
 

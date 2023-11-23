@@ -3,6 +3,7 @@ package com.clinicaOdontologica.service;
 import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public interface IOdontologoService {
 
     OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo);
 
-    void eliminarOdontologo(Long id);
+    void eliminarOdontologo(Long id) throws ResourceNotFoundException;
 
-    OdontologoSalidaDto buscarOdontologoPorDni(int dni);
+    //OdontologoSalidaDto buscarOdontologoPorDni(Long dni);
 }
 

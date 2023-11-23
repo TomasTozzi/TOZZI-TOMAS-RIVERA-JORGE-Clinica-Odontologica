@@ -21,6 +21,21 @@ public class GlobalExepcitionHandler {
         return mensaje;
     }
 
+   @ExceptionHandler({BadRequestException.class})
+   @ResponseStatus(HttpStatus.BAD_REQUEST)
+   public Map<String, String> manejarBadRequest(BadRequestException exception){
+        Map<String, String> mensaje = new HashMap<>();
+        mensaje.put("Mensaje: ", "Peticion no valido: " + exception.getMessage());
+        return mensaje;
+   }
+
+
+
+
+
+
+
+
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> procesarValidacionExcepcion (MethodArgumentNotValidException exception){
