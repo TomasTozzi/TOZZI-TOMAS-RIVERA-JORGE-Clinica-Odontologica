@@ -5,6 +5,7 @@ import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.entity.Paciente;
+import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
 import com.clinicaOdontologica.repository.PacienteRepository;
 import com.clinicaOdontologica.service.IPacienteService;
 import com.clinicaOdontologica.utils.JsonPrinter;
@@ -88,12 +89,17 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void eliminarPaciente(Long id) {
+    public void eliminarPaciente(Long id) throws ResourceNotFoundException {
         if (pacienteRepository.findById(id).orElse(null) != null) {
             pacienteRepository.deleteById(id);
             LOGGER.warn("Se ha eliminado el paciente con id: {}", id);
         } else {
             LOGGER.error("No se ha encontrado el paciente con id {}", id);
+            throw new ResourceNotFoundException("No se ha encontrado el paciente con id: " + id);
+
+
+
+
             //excepcion a lanzar aqui
         }
 
