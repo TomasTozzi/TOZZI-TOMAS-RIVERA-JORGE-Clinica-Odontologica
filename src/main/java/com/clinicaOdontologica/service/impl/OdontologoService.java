@@ -2,13 +2,9 @@ package com.clinicaOdontologica.service.impl;
 
 
 import com.clinicaOdontologica.dto.entrada.odontologo.OdontologoEntradaDto;
-import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.OdontologoModificacionEntradaDto;
-import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
-import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.entity.Odontologo;
-import com.clinicaOdontologica.entity.Paciente;
 import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
 import com.clinicaOdontologica.repository.OdontologoRepository;
 import com.clinicaOdontologica.service.IOdontologoService;
@@ -83,6 +79,7 @@ public class OdontologoService implements IOdontologoService {
             odontologoSalidaDto = modelMapper.map(odontologoAActualizar, OdontologoSalidaDto.class);
             LOGGER.warn("Odontologo actualizado: {}", JsonPrinter.toString(odontologoSalidaDto));
 
+
         } else {
             LOGGER.error("No fue posible actualizar el odontologo porque no se encuentra en nuestra base de datos");
             //lanzar excepcion correspondiente
@@ -108,6 +105,7 @@ public class OdontologoService implements IOdontologoService {
         modelMapper.typeMap(OdontologoEntradaDto.class, Odontologo.class);
         modelMapper.typeMap(Odontologo.class, OdontologoSalidaDto.class);
         modelMapper.typeMap(OdontologoModificacionEntradaDto.class, Odontologo.class);
+
 
     }
 

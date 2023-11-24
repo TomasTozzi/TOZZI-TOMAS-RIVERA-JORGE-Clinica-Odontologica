@@ -1,11 +1,8 @@
 package com.clinicaOdontologica.service.impl;
-import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
+
 import com.clinicaOdontologica.dto.entrada.turno.TurnoEntradaDto;
-import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.TurnoModificacionEntradaDto;
-import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.dto.salida.turno.TurnoSalidaDto;
-import com.clinicaOdontologica.entity.Paciente;
 import com.clinicaOdontologica.entity.Turno;
 import com.clinicaOdontologica.exepciones.BadRequestException;
 import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
@@ -18,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class TurnoService implements ITurnoService {
 
@@ -37,7 +35,7 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException{
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException {
         TurnoSalidaDto turnoSalida = null;
 
         if (true) {
@@ -51,10 +49,10 @@ public class TurnoService implements ITurnoService {
 
             Turno turnoEntidad = modelMapper.map(turno, Turno.class);
             Turno turnoAPersistir = turnoRepository.save(turnoEntidad);
-             turnoSalida = modelMapper.map(turnoAPersistir, TurnoSalidaDto.class);
+            turnoSalida = modelMapper.map(turnoAPersistir, TurnoSalidaDto.class);
 
         } else {
-            LOGGER.info("Hubo un problema al registrar el turno: "  + JsonPrinter.toString(turnoSalida));
+            LOGGER.info("Hubo un problema al registrar el turno: " + JsonPrinter.toString(turnoSalida));
             throw new BadRequestException("El paciento y/o el Odontologo no existen..");
         }
 
@@ -130,12 +128,6 @@ public class TurnoService implements ITurnoService {
         //         .addMappings(mapper -> mapper.map(PacienteModificacionEntradaDto::getDomicilioEntradaDto, Paciente::setDomicilio));
 
     }
-
-
-
-
-
-
 
 
 }

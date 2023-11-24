@@ -21,14 +21,16 @@ public class PacienteEntradaDto {
     @NotBlank(message = "Debe especificarse el apellido del paciente")
     private String apellido;
 
-   @NotNull(message = "El dni del paciente no puede ser nulo")
+    @NotNull(message = "El dni del paciente no puede ser nulo")
     //@Size(max = 12, message = "El dni debe tener hasta 12 digitos")
     private Integer dni;
+
 
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;
+
 
     @NotNull(message = "El domicilio del paciente no puede ser nulo")
     @Valid

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OdontologoRepository extends JpaRepository<Odontologo, Long> {
-   // Odontologo findById(Long id);
+    // Odontologo findById(Long id);
 }
 

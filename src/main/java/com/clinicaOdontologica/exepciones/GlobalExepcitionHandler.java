@@ -15,37 +15,31 @@ public class GlobalExepcitionHandler {
 
     @ExceptionHandler({ResourceNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, String> manejarResourceNotFound(ResourceNotFoundException exception){
+    public Map<String, String> manejarResourceNotFound(ResourceNotFoundException exception) {
         Map<String, String> mensaje = new HashMap<>();
         mensaje.put("Mensaje: ", "Recurso No encontrado: " + exception.getMessage());
         return mensaje;
     }
 
-   @ExceptionHandler({BadRequestException.class})
-   @ResponseStatus(HttpStatus.BAD_REQUEST)
-   public Map<String, String> manejarBadRequest(BadRequestException exception){
+    @ExceptionHandler({BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> manejarBadRequest(BadRequestException exception) {
         Map<String, String> mensaje = new HashMap<>();
         mensaje.put("Mensaje: ", "Peticion no valido: " + exception.getMessage());
         return mensaje;
-   }
-
-
-
-
-
-
+    }
 
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> procesarValidacionExcepcion (MethodArgumentNotValidException exception){
+    public Map<String, String> procesarValidacionExcepcion(MethodArgumentNotValidException exception) {
         Map<String, String> mensajeExcepcion = new HashMap<>();
 
         exception.getBindingResult().getAllErrors().forEach((error -> {
             String campoError = ((FieldError) error).getField();
             String mensajeError = error.getDefaultMessage();
             mensajeExcepcion.put(campoError, mensajeError);
-        } ));
+        }));
         return mensajeExcepcion;
     }
 
