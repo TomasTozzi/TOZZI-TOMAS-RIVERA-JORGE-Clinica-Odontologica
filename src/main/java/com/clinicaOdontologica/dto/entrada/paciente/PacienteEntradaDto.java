@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDate.*;
 
 public class PacienteEntradaDto {
 
@@ -39,6 +40,7 @@ public class PacienteEntradaDto {
 
     public PacienteEntradaDto() {
     }
+
 
     public PacienteEntradaDto(String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilioEntradaDto) {
         this.nombre = nombre;

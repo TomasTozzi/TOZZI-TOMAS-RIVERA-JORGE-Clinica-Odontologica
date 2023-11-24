@@ -1,6 +1,5 @@
 package com.clinicaOdontologica.service.impl;
 
-
 import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
@@ -34,7 +33,6 @@ public class PacienteService implements IPacienteService {
     public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
         LOGGER.info("PacienteEntradaDto: " + JsonPrinter.toString(paciente));
         Paciente pacienteEntidad = modelMapper.map(paciente, Paciente.class);
-
         Paciente pacienteAPersistir = pacienteRepository.save(pacienteEntidad);
         PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteAPersistir, PacienteSalidaDto.class);
         LOGGER.info("PacienteSalidaDto: " + JsonPrinter.toString(pacienteSalidaDto));
@@ -81,7 +79,7 @@ public class PacienteService implements IPacienteService {
 
         } else {
             LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            //lanzar excepcion correspondiente
+            //throw new ResourceNotFoundException("")
         }
 
 

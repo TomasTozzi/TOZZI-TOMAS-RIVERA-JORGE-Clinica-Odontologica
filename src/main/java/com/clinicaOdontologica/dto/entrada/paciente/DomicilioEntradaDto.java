@@ -28,6 +28,7 @@ public class DomicilioEntradaDto {
     public DomicilioEntradaDto() {
     }
 
+
     public DomicilioEntradaDto(String calle, int numero, String localidad, String provincia) {
         this.calle = calle;
         this.numero = numero;
