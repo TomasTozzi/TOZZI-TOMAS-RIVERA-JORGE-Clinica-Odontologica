@@ -25,4 +25,6 @@ public class OdontologoSalidaDto {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

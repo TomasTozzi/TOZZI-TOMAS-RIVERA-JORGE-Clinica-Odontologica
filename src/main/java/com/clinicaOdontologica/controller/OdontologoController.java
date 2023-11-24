@@ -33,7 +33,7 @@ public class OdontologoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<OdontologoSalidaDto>> listarPacientes() {
+    public ResponseEntity<List<OdontologoSalidaDto>> listarOdontologos() {
         return new ResponseEntity<>(odontologoService.listarOdontologos(), HttpStatus.OK);
     }
 

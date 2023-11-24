@@ -5,8 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DOMICILIOS")
 public class Domicilio {
-
-    //json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) -> entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
