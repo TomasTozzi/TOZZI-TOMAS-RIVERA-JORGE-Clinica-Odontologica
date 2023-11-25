@@ -50,6 +50,7 @@ public class PacienteEntradaDto {
         this.domicilioEntradaDto = domicilioEntradaDto;
     }
 
+
     public String getNombre() {
         return nombre;
     }

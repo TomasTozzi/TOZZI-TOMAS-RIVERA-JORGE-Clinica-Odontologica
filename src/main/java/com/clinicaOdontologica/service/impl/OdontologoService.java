@@ -33,7 +33,6 @@ public class OdontologoService implements IOdontologoService {
     public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo) {
         LOGGER.info("OdontologoEntradaDto: " + JsonPrinter.toString(odontologo));
         Odontologo odontologoEntidad = modelMapper.map(odontologo, Odontologo.class);
-
         Odontologo odontologoAPersistir = odontologoRepository.save(odontologoEntidad);
         OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
         LOGGER.info("OdontologoSalidaDto: " + JsonPrinter.toString(odontologoSalidaDto));
@@ -66,7 +65,7 @@ public class OdontologoService implements IOdontologoService {
 
 
     @Override
-    public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) {
+    public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) throws ResourceNotFoundException {
         Odontologo odontologoRecibido = modelMapper.map(odontologo, Odontologo.class);
         Odontologo odontologoAActualizar = odontologoRepository.findById(odontologoRecibido.getId()).orElse(null);
 
@@ -82,10 +81,8 @@ public class OdontologoService implements IOdontologoService {
 
         } else {
             LOGGER.error("No fue posible actualizar el odontologo porque no se encuentra en nuestra base de datos");
-            //lanzar excepcion correspondiente
-        }
-
-
+            throw new ResourceNotFoundException("No se ha encontrado el Odontologo con id: " + odontologoRecibido.getId());
+            }
         return odontologoSalidaDto;
     }
 
@@ -96,9 +93,8 @@ public class OdontologoService implements IOdontologoService {
             LOGGER.warn("Se ha eliminado el odontologo con id: {}", id);
         } else {
             LOGGER.error("No se ha encontrado el odontologo con id {}", id);
-            throw new ResourceNotFoundException("No se ha encontrado el paciente con id: " + id);
+            throw new ResourceNotFoundException("No se ha encontrado el Odontologo con id: " + id);
         }
-
     }
 
     private void configureMapping() {

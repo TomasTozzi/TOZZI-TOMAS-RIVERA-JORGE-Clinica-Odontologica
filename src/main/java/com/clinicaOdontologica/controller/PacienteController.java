@@ -42,7 +42,7 @@ public class PacienteController {
 
     //PUT
     @PutMapping("/actualizar")
-    public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) {
+    public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) throws ResourceNotFoundException{
         return pacienteService.actualizarPaciente(paciente);
     }
 
