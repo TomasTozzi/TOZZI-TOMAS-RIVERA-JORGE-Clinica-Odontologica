@@ -1,7 +1,7 @@
 package com.clinicaOdontologica.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "TURNOS")
@@ -11,23 +11,25 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime fechaYHora;
+    private LocalDate fechaYHora;
 
-    @ManyToOne
+
     @JoinColumn(name = "odontologo_id")
-    private Odontologo odontologo;
-    @ManyToOne
+    //private Odontologo odontologo;
+    private Long idOdontologo;
+
+
     @JoinColumn(name = "paciente_id")
-    private Paciente paciente;
+    private Long idPaciente;
 
     public Turno() {
     }
 
-    public Turno(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
-
+    public Turno(Long id, LocalDate fechaYHora, Long idOdontologo, Long idPaciente) {
+        this.id = id;
         this.fechaYHora = fechaYHora;
-        this.odontologo = odontologo;
-        this.paciente = paciente;
+        this.idOdontologo = idOdontologo;
+        this.idPaciente = idPaciente;
     }
 
     public Long getId() {
@@ -38,27 +40,27 @@ public class Turno {
         this.id = id;
     }
 
-    public LocalDateTime getFechaYHora() {
+    public LocalDate getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(LocalDateTime fechaYHora) {
+    public void setFechaYHora(LocalDate fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
-    public Odontologo getOdontologo() {
-        return odontologo;
+    public Long getIdOdontologo() {
+        return idOdontologo;
     }
 
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
+    public void setIdOdontologo(Long idOdontologo) {
+        this.idOdontologo = idOdontologo;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Long getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setIdPaciente(Long idPaciente) {
+        this.idPaciente = idPaciente;
     }
 }
