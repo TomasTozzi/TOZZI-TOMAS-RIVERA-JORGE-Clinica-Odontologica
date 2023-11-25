@@ -40,8 +40,8 @@ public class TurnoService implements ITurnoService {
     public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException {
             TurnoSalidaDto turnoSalidaDto;
             LOGGER.info("TurnoEntradaDto: " + JsonPrinter.toString(turnoEntradaDto));
-            PacienteSalidaDto paciente = pacienteService.buscarPacientePorId(turnoEntradaDto.getIdPaciente());
-            OdontologoSalidaDto odontologo = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getIdOdontologo());
+            PacienteSalidaDto paciente = pacienteService.buscarPacientePorId(turnoEntradaDto.getPaciente());
+            OdontologoSalidaDto odontologo = odontologoService.buscarOdontologoPorId(turnoEntradaDto.getOdontologo());
 
             String pacienteNoEnBdd = "El paciente no se encuentra en nuestra base de datos";
             String odontologoNoEnBdd = "El odontologo no se encuentra en nuestra base de datos";
@@ -124,7 +124,7 @@ public class TurnoService implements ITurnoService {
     }
 
     private void configureMapping() {
-        modelMapper.typeMap(TurnoEntradaDto.class, Turno.class).addMappings(mapper -> mapper.map(TurnoEntradaDto::getIdPaciente, Turno::setIdPaciente)).addMappings(mapper -> mapper.map(TurnoEntradaDto::getIdOdontologo, Turno::setIdOdontologo));
+        modelMapper.typeMap(TurnoEntradaDto.class, Turno.class).addMappings(mapper -> mapper.map(TurnoEntradaDto::getPaciente, Turno::setIdPaciente)).addMappings(mapper -> mapper.map(TurnoEntradaDto::getOdontologo, Turno::setIdOdontologo));
         modelMapper.typeMap(Turno.class, TurnoSalidaDto.class).addMappings(mapper -> mapper.map(Turno::getIdPaciente, TurnoSalidaDto::setPaciente)).addMappings(mapper -> mapper.map(Turno::getIdOdontologo, TurnoSalidaDto::setOdontologo));
         modelMapper.typeMap(TurnoModificacionEntradaDto.class, Turno.class).addMappings(mapper -> mapper.map(TurnoModificacionEntradaDto::getIdPaciente, Turno::setIdPaciente)).addMappings(mapper -> mapper.map(TurnoModificacionEntradaDto::getIdOdontologo, Turno::setIdOdontologo));
 
