@@ -3,22 +3,22 @@ package com.clinicaOdontologica.dto.salida.turno;
 import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TurnoSalidaDto {
     private Long id;
 
-    private LocalDateTime fechaYHora;
+    private LocalDate fechaYHora;
 
 
-    private OdontologoSalidaDto odontologo;
+    private Long odontologo;
 
-    private PacienteSalidaDto paciente;
+    private Long paciente;
 
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(LocalDateTime fechaYHora, OdontologoSalidaDto odontologo, PacienteSalidaDto paciente) {
+    public TurnoSalidaDto(LocalDate fechaYHora, Long odontologo, Long paciente) {
 
         this.fechaYHora = fechaYHora;
         this.odontologo = odontologo;
@@ -33,27 +33,27 @@ public class TurnoSalidaDto {
         this.id = id;
     }
 
-    public LocalDateTime getFechaYHora() {
+    public LocalDate getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(LocalDateTime fechaYHora) {
+    public void setFechaYHora(LocalDate fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
-    public OdontologoSalidaDto getOdontologo() {
+    public Long getOdontologo() {
         return odontologo;
     }
 
-    public void setOdontologo(OdontologoSalidaDto odontologo) {
+    public void setOdontologo(Long odontologo) {
         this.odontologo = odontologo;
     }
 
-    public PacienteSalidaDto getPaciente() {
+    public Long getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(PacienteSalidaDto paciente) {
+    public void setPaciente(Long paciente) {
         this.paciente = paciente;
     }
 }
