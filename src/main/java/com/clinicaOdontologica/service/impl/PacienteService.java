@@ -50,18 +50,6 @@ public class PacienteService implements IPacienteService {
         return pacientesSalidaDto;
     }
 
-    @Override
-    public PacienteSalidaDto buscarPacientePorId(Long id) {
-        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
-        PacienteSalidaDto pacienteEncontrado = null;
-
-        if (pacienteBuscado != null) {
-            pacienteEncontrado = modelMapper.map(pacienteBuscado, PacienteSalidaDto.class);
-            LOGGER.info("Paciente encontrado: {}", JsonPrinter.toString(pacienteEncontrado));
-        } else LOGGER.error("El id no se encuentra registrado en la base de datos");
-
-        return pacienteEncontrado;
-    }
 
     @Override
     public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto paciente) throws ResourceNotFoundException {
@@ -98,6 +86,18 @@ public class PacienteService implements IPacienteService {
 
     }
 
+    @Override
+    public PacienteSalidaDto buscarPacientePorId(Long id) {
+        Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
+        PacienteSalidaDto pacienteEncontrado = null;
+
+        if (pacienteBuscado != null) {
+            pacienteEncontrado = modelMapper.map(pacienteBuscado, PacienteSalidaDto.class);
+            LOGGER.info("Paciente encontrado: {}", JsonPrinter.toString(pacienteEncontrado));
+        } else LOGGER.error("El id no se encuentra registrado en la base de datos");
+
+        return pacienteEncontrado;
+    }
 
     @Override
     public PacienteSalidaDto buscarPacientePorDni(int dni) {

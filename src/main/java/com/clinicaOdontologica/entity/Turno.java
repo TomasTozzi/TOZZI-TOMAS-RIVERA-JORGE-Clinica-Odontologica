@@ -16,11 +16,11 @@ public class Turno {
 
     @JoinColumn(name = "odontologo_id")
     //private Odontologo odontologo;
-    private Long idOdontologo;
+    private Long Odontologo;
 
 
     @JoinColumn(name = "paciente_id")
-    private Long idPaciente;
+    private Long Paciente;
 
     public Turno() {
     }
@@ -28,8 +28,8 @@ public class Turno {
     public Turno(Long id, LocalDate fechaYHora, Long idOdontologo, Long idPaciente) {
         this.id = id;
         this.fechaYHora = fechaYHora;
-        this.idOdontologo = idOdontologo;
-        this.idPaciente = idPaciente;
+        this.Odontologo = idOdontologo;
+        this.Paciente = idPaciente;
     }
 
     public Long getId() {
@@ -48,19 +48,19 @@ public class Turno {
         this.fechaYHora = fechaYHora;
     }
 
-    public Long getIdOdontologo() {
-        return idOdontologo;
+    public Long getOdontologo() {
+        return Odontologo;
     }
 
-    public void setIdOdontologo(Long idOdontologo) {
-        this.idOdontologo = idOdontologo;
+    public void setOdontologo(Long idOdontologo) {
+        this.Odontologo = idOdontologo;
     }
 
-    public Long getIdPaciente() {
-        return idPaciente;
+    public Long getPaciente() {
+        return Paciente;
     }
 
-    public void setIdPaciente(Long idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setPaciente(Long idPaciente) {
+        this.Paciente = idPaciente;
     }
 }
