@@ -2,7 +2,6 @@ window.onload = function () {
   console.log("Clinica Odontologica Abierta...");
 };
 
-
 // Funciones Odontologo
 // Crear Odontologo.
 function crearOdontologo() {
@@ -23,10 +22,10 @@ function eliminarOdontologoPorId() {
 
 // Consultar Odontologo por id.
 function consultarOdontologoPorId() {
-    console.log("consultar Odontologo");
-    let id = document.getElementById("odontologoId").value;
-    consultarOdontologo(id);
-  }
+  console.log("consultar Odontologo");
+  let id = document.getElementById("odontologoId").value;
+  consultarOdontologo(id);
+}
 
 // Consultar todos los Odontologos.
 function consultarOdontologos() {
@@ -52,22 +51,21 @@ function limpiarFormulario(formId) {
   console.log("Se limpió el formulario " + formId);
 }
 
-
 //METODOS HTTP
 // POST ODONTOLOGO.
 function enviarOdontologo(odontologoNuevo) {
-    let options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(odontologoNuevo),
-};
+  };
 
-let url = "http://localhost:8081/odontologo/registrar";
-fetch(url, options)
-.then((Response) => Response.json())
-.then((data) => console.log(data.id));
+  let url = "http://localhost:8081/odontologo/registrar";
+  fetch(url, options)
+    .then((Response) => Response.json())
+    .then((data) => console.log(data.id));
 }
 
 // DELETE ODONTOLOGO.
@@ -76,7 +74,7 @@ function eliminarOdontologo() {
 
   let options = {
     method: "DELETE",
-     };
+  };
 
   let url = `http://localhost:8081/odontologo/eliminar/${odontologoId}`;
 
@@ -87,7 +85,7 @@ function eliminarOdontologo() {
   }
 
   document.getElementById("consultarOdontologosForm").reset();
-    console.log("Se eliminó el odontólogo con id " + odontologoId);
+  console.log("Se eliminó el odontólogo con id " + odontologoId);
 }
 
 // GET ODONTOLOGO X ID
@@ -103,13 +101,10 @@ function consultarOdontologo(id) {
 
   let url = `http://localhost:8081/odontologo/${odontologoId}`;
 
-
-  
   fetch(url, options)
-  .then((Response) => Response.json())
-  .then((data) =>  console.log(data))
-  .catch((error) => console.log(error));
-
+    .then((Response) => Response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
 }
 
 // GET TODOS LOS ODONTOLOGOS
@@ -128,23 +123,16 @@ function consultarTodosOdontologos() {
     .then((data) => console.log(data));
 }
 
-
 function modificarOdontologo(odontologoNuevo) {
   let odontologoId = odontologoNuevo.id;
   console.log(odontologoId + "odonto id");
-  
-let odonto = consultarOdontologo(odontologoId);
-console.log("Retorno" + odonto);
-if (odonto == undefined) {
-  console.log("No se encontró el odontólogo");
-} else {
 
-console.log("Se modifica el odonto");
-enviarOdontologo(odontologoNuevo);
-
-
-
-
-
-}
+  let odonto = consultarOdontologo(odontologoId);
+  console.log("Retorno" + odonto);
+  if (odonto == undefined) {
+    console.log("No se encontró el odontólogo");
+  } else {
+    console.log("Se modifica el odonto");
+    enviarOdontologo(odontologoNuevo);
+  }
 }

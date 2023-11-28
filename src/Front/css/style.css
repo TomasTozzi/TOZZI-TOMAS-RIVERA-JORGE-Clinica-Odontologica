@@ -3,6 +3,21 @@ body {
     margin: 20px;
 }
 
+.flexRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flexCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#turnoForm, #odontologoForm, #pacienteForm{
+    justify-content:flex-start
+}
 h2 {
     color: #333;
 }
