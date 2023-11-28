@@ -4,32 +4,67 @@ window.onload = function () {
 
 
 // Funciones Odontologo
-function crearOdontologo() {
-  let odontologoNuevo = {
-    matricula: document.getElementById("matricula").value,
-    nombre: document.getElementById("nombreOdontologo").value,
-    apellido: document.getElementById("apellidoOdontologo").value,
+// Crear Odontologo.
+function crearPaciente() {
+  let pacienteNuevo = {
+    nombre: document.getElementById("nombre").value,
+    apellido: document.getElementById("apellido").value,
+    dni: document.getElementById("dni").value,
+    fechaIngreso: document.getElementById("fechaIngreso").value,
+    domicilioEntradaDto: {
+      calle: document.getElementById("calle").value,
+      numero: document.getElementById("numero").value,
+      localidad: document.getElementById("localidad").value,
+      provincia: document.getElementById("provincia").value,
+  }
   };
-  enviarOdontologo(odontologoNuevo);
-  console.log("Odontólogo creado");
-  console.log(odontologoNuevo);
-}
-function eliminarOdontologoPorId() {
-  console.log("Eliminar Odontologo");
-  eliminarOdontologo();
+
+  enviarPaciente(pacienteNuevo);
+  console.log("Paciente creado");
+  console.log(pacienteNuevo);
 }
 
-function consultarOdontologoPorId() {
-    console.log("consultar Odontologo");
-    consultarOdontologo();
+
+
+// Eliminar Odontologo.
+function eliminarPacientePorId() {
+  console.log("Eliminar Paciente");
+  eliminarPaciente();
+}
+
+// Consultar Odontologo por id.
+function consultarPacientePorId() {
+    console.log("consultar Paciente");
+    let id = document.getElementById("pacienteId").value;
+    consultarPaciente(id);
   }
 
-function consultarOdontologos() {
+// Consultar todos los Odontologos.
+function consultarPacientes() {
   console.log("ConsultarTodosOdontologos");
-  consultarTodosOdontologos();
+  consultarTodosPacientes();
 }
 
+// Actualizar Odontologo.
+function actualizarPaciente() {
+  console.log("Actualizar Paciente");
+  let pacienteNuevo = {
+    id: document.getElementById("actualizarPacienteId").value,
+    nombre: document.getElementById("actualizarNombrePaciente").value,
+    apellido: document.getElementById("actualizarApellidoPaciente").value,
+    dni: document.getElementById("actualizarDniPaciente").value,
+    fechaIngreso: document.getElementById("actualizarFechaIngresoPaciente").value,
+    domicilioEntradaDto: {
+      calle: document.getElementById("actualizarCallePaciente").value,
+      numero: document.getElementById("actualizarNumeroPaciente").value,
+      localidad: document.getElementById("actualizarLocalidadPaciente").value,
+      provincia: document.getElementById("actualizarProvinciaPaciente").value,
+  }
+}
+  modificarPaciente(pacienteNuevo);
+}
 
+// Limpiar formulario.
 function limpiarFormulario(formId) {
   document.getElementById(formId).reset();
   console.log("Se limpió el formulario " + formId);
@@ -37,30 +72,31 @@ function limpiarFormulario(formId) {
 
 
 //METODOS HTTP
-function enviarOdontologo(odontologoNuevo) {
+// POST PACIENTE.
+function enviarPaciente(pacienteNuevo) {
     let options = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-    body: JSON.stringify(odontologoNuevo),
+    body: JSON.stringify(pacienteNuevo),
 };
 
-let url = "http://localhost:8081/odontologo/registrar";
-
+let url = "http://localhost:8081/pacientes/registrar";
 fetch(url, options)
 .then((Response) => Response.json())
 .then((data) => console.log(data.id));
 }
 
-function eliminarOdontologo() {
-  let odontologoId = document.getElementById("odontologoId").value;
+// DELETE ODONTOLOGO.
+function eliminarPaciente() {
+  let pacienteId = document.getElementById("pacienteId").value;
 
   let options = {
     method: "DELETE",
      };
 
-  let url = `http://localhost:8081/odontologo/eliminar/${odontologoId}`;
+  let url = `http://localhost:8081/pacientes/eliminar/${pacienteId}`;
 
   try {
     fetch(url, options);
@@ -68,13 +104,14 @@ function eliminarOdontologo() {
     console.log("Hubo un error en la consultar. Por favor verifica el id");
   }
 
-  document.getElementById("consultarOdontologosForm").reset();
-    console.log("Se eliminó el odontólogo con id " + odontologoId);
+  document.getElementById("consultarPacientesForm").reset();
+    console.log("Se eliminó el odontólogo con id " + pacienteId);
 }
 
-function consultarOdontologo() {
-  let odontologoId = document.getElementById("odontologoId").value;
-
+// GET ODONTOLOGO X ID
+function consultarPaciente(id) {
+  let pacienteId = id;
+  console.log("dentro de consultar odontologo");
   let options = {
     method: "GET",
     headers: {
@@ -82,7 +119,7 @@ function consultarOdontologo() {
     },
   };
 
-  let url = `http://localhost:8081/odontologo/${odontologoId}`;
+  let url = `http://localhost:8081/pacientes/${pacienteId}`;
 
   fetch(url, options)
     .then((Response) => Response.json())
@@ -90,9 +127,11 @@ function consultarOdontologo() {
     .catch((error) =>
       console.log("Hubo un error en la consultar. Por favor verifica el id")
     );
+    return pacienteId;
 }
 
-function consultarTodosOdontologos() {
+// GET TODOS LOS ODONTOLOGOS
+function consultarTodosPacientes() {
   let options = {
     method: "GET",
     headers: {
@@ -100,9 +139,57 @@ function consultarTodosOdontologos() {
     },
   };
 
-  let url = "http://localhost:8081/odontologo/listar";
+  let url = "http://localhost:8081/pacientes/listar";
 
   fetch(url, options)
     .then((Response) => Response.json())
     .then((data) => console.log(data));
+}
+
+
+function modificarPaciente(pacienteNuevo) {
+  let pacienteId = pacienteNuevo.id;
+  console.log(pacienteId + "paciente id");
+  
+if (consultarPaciente(pacienteId) != null) {
+    console.log("Se encontro paciente");
+    let options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pacienteNuevo),
+    };
+   
+    let url = `http://localhost:8081/pacientes/actualizar`;
+
+    fetch(url, options)
+      .then((Response) => Response.json())
+      .then((data) => console.log(data))
+      .catch((error) =>
+        console.log("Hubo un error en la consultar. Por favor verifica el id")
+      );
+      return pacienteId;
+
+
+
+
+
+
+
+
+
+  } else {
+    console.log("No se encontro paciente");
+    
+  }
+
+
+
+
+
+
+
+
+
 }
