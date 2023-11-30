@@ -104,23 +104,17 @@ function limpiarFormulario(formId) {
   
   // GET ODONTOLOGO X ID
   function consultarTurno(id) {
-    
+
     console.log("dentro de consultar turnos");
-    let options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  
+    
     let url = `http://localhost:8081/turnos/${id}`;
-  
-  
+
     
     fetch(url, options)
     .then((Response) => Response.json())
     .then((data) =>  console.log(data))
     .catch((error) => console.log(error));
+    return turnoId
   
   }
   
@@ -142,21 +136,44 @@ function limpiarFormulario(formId) {
   
   
   function modificarTurno(turnoNuevo) {
-    let Id = turnoNuevo.id;
-    console.log(turnoNuevo.id + "turno id");
+    let turnoId = turnoNuevo.id;
+    if (ejecutarOperacionAsync(turnoId)) {
+      let options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(turnoNuevo),
+      };
+  
+      let url = `http://localhost:8081/turnos/actualizar`;
+  
+      fetch(url, options)
+        .then((Response) => Response.json())
+        .then((data) => (data))
+        .catch((error) =>
+          console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
+        );
+        console.log(turnoNuevo);
+        return turnoId;
+  } 
+    else {  
+          console.log("No se encontro turno");
+    }
+  }
+
+
+async function ejecutarOperacionAsync(id) {
+  let resultado = null;
+  try {
     
-  let turnoEncontrado = consultarTurno(Id);
-  console.log("Retorno" + turnoEncontrado);
-  if (turnoEncontrado == undefined) {
-    console.log("No se encontró elTurno");
-  } else {
-  
-  console.log("Se modifica el turno");
-  enviarTurno(turnoNuevo);
-  
-  
-  
-  
-  
+    resultado = await fetch(`http://localhost:8081/turnos/${id}`);
+    console.log('Operación completada con éxito:', resultado);
+    // Puedes hacer más cosas con el resultado aquí
+  } catch (error) {
+    console.error('Error en la operación:', error);
+    // Manejar errores aquí si es necesario
   }
-  }
+  console.log(resultado.ok);
+  return resultado;
+}

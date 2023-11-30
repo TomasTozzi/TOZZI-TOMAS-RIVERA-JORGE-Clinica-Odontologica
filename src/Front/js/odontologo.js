@@ -88,6 +88,11 @@ function eliminarOdontologo() {
   console.log("Se eliminó el odontólogo con id " + odontologoId);
 }
 
+
+
+
+
+
 // GET ODONTOLOGO X ID
 function consultarOdontologo(id) {
   console.log("dentro de consultar odontologo");
@@ -97,11 +102,22 @@ function consultarOdontologo(id) {
   let datos = fetch(url)
     .then((Response) => Response.json())
     .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-
-  console.log(datos);
+    .catch((error) =>
+    console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
+  );
+  return pacienteId;
 
 }
+
+
+
+
+
+
+
+
+
+
 
 // GET TODOS LOS ODONTOLOGOS
 function consultarTodosOdontologos() {
@@ -124,46 +140,44 @@ function consultarTodosOdontologos() {
 
 // Función modificarOdontologo con async/await
 function modificarOdontologo(odontologoNuevo) {
-  let id = odontologoNuevo.id;
-  console.log("Odontologo id: " + id);
- if(odontologoNuevo.id != null){
-  let options = {
+  let odontologoId = odontologoNuevo.id;
+  if (ejecutarOperacionAsync(odontologoId)) {
+    let options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(odontologoNuevo),
     };
-    let url = "http://localhost:8081/odontologo/actualizar";
+
+    let url = `http://localhost:8081/odontologo/actualizar`;
+
     fetch(url, options)
       .then((Response) => Response.json())
-      .then((data) => console.log(data.id));
-      console.log("Odontologo actualizado");
+      .then((data) => (data))
+      .catch((error) =>
+        console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
+      );
       console.log(odontologoNuevo);
-
-  } 
-  else {
-      console.log("No se pudo actualizar el odontologo");
+      return odontologoId;
+} 
+  else {  
+        console.log("No se encontro odontologo");
   }
-
-      // Llamar a la función para enviar el odontólogo modificado
- // enviarModificacionOdontologo(odontologoNuevo);
-
 }
 
 
-
-/*function enviarModificacionOdontologo(odontologoNuevo) {
-  let options = {
-    method: "UPDATE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(odontologoNuevo),
-  };
-
-  let url = "http://localhost:8081/odontologo/actualizar";
-  fetch(url, options)
-    .then((Response) => Response.json())
-    .then((data) => console.log(data.id));
-}*/
+async function ejecutarOperacionAsync(id) {
+let resultado = null;
+try {
+  
+  resultado = await fetch(`http://localhost:8081/odontologo/${id}`);
+  console.log('Operación completada con éxito:', resultado);
+  // Puedes hacer más cosas con el resultado aquí
+} catch (error) {
+  console.error('Error en la operación:', error);
+  // Manejar errores aquí si es necesario
+}
+console.log(resultado.ok);
+return resultado;
+}

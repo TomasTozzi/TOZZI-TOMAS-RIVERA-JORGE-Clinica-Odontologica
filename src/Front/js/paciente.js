@@ -94,7 +94,7 @@ function eliminarPaciente() {
 
   let options = {
     method: "DELETE",
-     };
+    };
 
   let url = `http://localhost:8081/pacientes/eliminar/${pacienteId}`;
 
@@ -108,30 +108,32 @@ function eliminarPaciente() {
     console.log("Se eliminó el odontólogo con id " + pacienteId);
 }
 
-// GET ODONTOLOGO X ID
+
+
+
+
+
+// GET PACIENTE X ID
 function consultarPaciente(id) {
   let pacienteId = id;
-  console.log("dentro de consultar odontologo");
-  let options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
+  console.log("dentro de consultar paciente");
   let url = `http://localhost:8081/pacientes/${pacienteId}`;
 
-  fetch(url, options)
+  let idRetorno = null
+
+  fetch(url)
     .then((Response) => Response.json())
     .then((data) => console.log(data))
+    .then((data) => idRetorno = data.id)
     .catch((error) =>
-      console.log("Hubo un error en la consultar. Por favor verifica el id")
+      console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
     );
-    return pacienteId;
+    console.log(idRetorno);
+    return idRetorno;
 }
 
-// GET TODOS LOS ODONTOLOGOS
-function consultarTodosPacientes() {
+// GET TODOS LOS pacientes
+function consultarTodosPacientes(){
   let options = {
     method: "GET",
     headers: {
@@ -147,9 +149,9 @@ function consultarTodosPacientes() {
 }
 
 
-function modificarPaciente(pacienteNuevo) {
+/*function modificarPaciente(pacienteNuevo) {
   let pacienteId = pacienteNuevo.id;
-  console.log(pacienteId + "paciente id");
+  console.log(pacienteId+ " " + "paciente id");
   
     if (consultarPaciente(pacienteId) != null) {
     let options = {
@@ -159,28 +161,63 @@ function modificarPaciente(pacienteNuevo) {
       },
       body: JSON.stringify(pacienteNuevo),
     };
-   
+
     let url = `http://localhost:8081/pacientes/actualizar`;
 
     fetch(url, options)
       .then((Response) => Response.json())
       .then((data) => (data))
       .catch((error) =>
-        console.log("Hubo un error en la consultar. Por favor verifica el id")
+        console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
       );
       return pacienteId;
 
 
-  } else {
+  } 
+  else {
     console.log("No se encontro paciente");
       }
+}*/
+
+function modificarPaciente(pacienteNuevo) {
+    let pacienteId = pacienteNuevo.id;
+    if (ejecutarOperacionAsync(pacienteId)) {
+      let options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pacienteNuevo),
+      };
+  
+      let url = `http://localhost:8081/pacientes/actualizar`;
+  
+      fetch(url, options)
+        .then((Response) => Response.json())
+        .then((data) => (data))
+        .catch((error) =>
+          console.log("Hubo un error en la consultar. Por favor verifica el id" + error)
+        );
+        console.log(pacienteNuevo);
+        return pacienteId;
+  } 
+    else {  
+          console.log("No se encontro paciente");
+    }
+  }
 
 
-
-
-
-
-
-
-
+async function ejecutarOperacionAsync(id) {
+  let resultado = null;
+  try {
+    
+    resultado = await fetch(`http://localhost:8081/pacientes/${id}`);
+    console.log('Operación completada con éxito:', resultado);
+    // Puedes hacer más cosas con el resultado aquí
+  } catch (error) {
+    console.error('Error en la operación:', error);
+    // Manejar errores aquí si es necesario
+  }
+  console.log(resultado.ok);
+  return resultado;
 }
