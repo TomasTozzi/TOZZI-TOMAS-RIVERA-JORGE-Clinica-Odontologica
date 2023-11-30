@@ -8,6 +8,7 @@ import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.dto.salida.turno.TurnoSalidaDto;
 import com.clinicaOdontologica.exepciones.BadRequestException;
+import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,32 +22,61 @@ class TurnoServiceTest {
 
     @Autowired
     private TurnoService turnoService;
+    @Autowired
     private PacienteService pacienteService;
-    OdontologoService odontologoService;
+    @Autowired
+    private  OdontologoService odontologoService;
 
     @Test
-    void debeRegistrarTurnoYRetornarId() throws BadRequestException {
+    void debeRegistrarTurnoYRetornarId() throws BadRequestException, ResourceNotFoundException {
 
-        OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
-        OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
 
         PacienteEntradaDto pacienteNuevo = new PacienteEntradaDto("Jorge", "Gonzalez", 123456789, LocalDate.of(2025, 12, 24), new DomicilioEntradaDto("Simpreviva", 1234, "Quilmes", "Bs.As."));
         PacienteSalidaDto pacienteRetorno = pacienteService.registrarPaciente(pacienteNuevo);
 
 
-        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), 1L, 1L);
+        OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
+        OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
+
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
         TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
 
         assertNotNull(turnoRetorno.getId());
 
+    }
+
+    @Test
+    void deberiaEliminarUnTurno() throws BadRequestException, ResourceNotFoundException {
+        PacienteEntradaDto pacienteNuevo = new PacienteEntradaDto("Jorge", "Gonzalez", 123456789, LocalDate.of(2025, 12, 24), new DomicilioEntradaDto("Simpreviva", 1234, "Quilmes", "Bs.As."));
+        PacienteSalidaDto pacienteRetorno = pacienteService.registrarPaciente(pacienteNuevo);
 
 
+        OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
+        OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
 
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
+        TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
 
+        turnoService.eliminarTurno(turnoRetorno.getId());
 
-
-
-
+        assertTrue(turnoService.listarTurnos().isEmpty());
 
     }
+
+
+    @Test
+    void laListaDeberiaEstarLlena() throws BadRequestException, ResourceNotFoundException {
+        PacienteEntradaDto pacienteNuevo = new PacienteEntradaDto("Jorge", "Gonzalez", 123456789, LocalDate.of(2025, 12, 24), new DomicilioEntradaDto("Simpreviva", 1234, "Quilmes", "Bs.As."));
+        PacienteSalidaDto pacienteRetorno = pacienteService.registrarPaciente(pacienteNuevo);
+
+
+        OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
+        OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
+
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
+        TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
+
+        assertFalse(turnoService.listarTurnos().isEmpty());
+    }
+
 }

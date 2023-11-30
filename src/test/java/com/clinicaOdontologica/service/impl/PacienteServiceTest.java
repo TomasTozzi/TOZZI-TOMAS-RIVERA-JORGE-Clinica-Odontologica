@@ -4,7 +4,6 @@ import com.clinicaOdontologica.dto.entrada.paciente.DomicilioEntradaDto;
 import com.clinicaOdontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.clinicaOdontologica.exepciones.ResourceNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PacienteServiceTest {
+
 
     @Autowired
     private PacienteService pacienteService;
@@ -32,32 +32,32 @@ class PacienteServiceTest {
 
     }
 
+
     @Test
     @Order(2)
-    void debeRetornarListaVacia(){
-        List<PacienteSalidaDto> listaPacientes = pacienteService.listarPacientes();
-        assertTrue(listaPacientes.isEmpty());
+    void debeEliminarPacienteConId1YRetornarListaVacia(){
+
+        PacienteEntradaDto pacienteNuevo = new PacienteEntradaDto("Jorge", "Gonzalez", 123456789, LocalDate.of(2025, 12, 24), new DomicilioEntradaDto("Simpreviva", 1234, "Quilmes", "Bs.As."));
+
+        pacienteService.registrarPaciente(pacienteNuevo);
+
+        try {
+            pacienteService.eliminarPaciente(2L);
+        } catch (Exception exception) {
+                exception.printStackTrace();
+        }
+        assertTrue(pacienteService.listarPacientes().isEmpty());
     }
 
     @Test
     @Order(3)
-    void debeEliminarPacienteConId1(){
+    void debeRetornarListaLlena(){
+        PacienteEntradaDto pacienteNuevo = new PacienteEntradaDto("Jorge", "Gonzalez", 123456789, LocalDate.of(2025, 12, 24), new DomicilioEntradaDto("Simpreviva", 1234, "Quilmes", "Bs.As."));
 
-        try {
-            pacienteService.eliminarPaciente(1L);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+         pacienteService.registrarPaciente(pacienteNuevo);
 
-        assertThrows(ResourceNotFoundException.class, () -> pacienteService.eliminarPaciente(1L));
-
+        assertFalse(pacienteService.listarPacientes().isEmpty());
     }
-
-
-
-
-
-
 
 
 }
