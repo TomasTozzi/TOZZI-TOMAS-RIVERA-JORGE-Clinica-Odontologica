@@ -1,18 +1,22 @@
-package com.clinicaOdontologica.dto.salida.odontologo;
+package com.clinicaOdontologica.entity;
 
-public class OdontologoSalidaDto {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ODONTOLOGOS")
+public class Odontologo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String matricula;
     private String nombre;
     private String apellido;
 
-
-    public OdontologoSalidaDto() {
+    public Odontologo() {
     }
 
-    public OdontologoSalidaDto(Long id, String matricula, String nombre, String apellido) {
-        this.id = id;
+    public Odontologo(String matricula, String nombre, String apellido) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -49,4 +53,6 @@ public class OdontologoSalidaDto {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+
+
 }

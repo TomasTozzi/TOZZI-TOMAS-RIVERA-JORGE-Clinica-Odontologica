@@ -1,25 +1,35 @@
-package com.clinicaOdontologica.dto.salida.paciente;
+package com.clinicaOdontologica.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
-public class PacienteSalidaDto {
+@Entity
+@Table(name = "PACIENTES")
+public class Paciente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellido;
+    @Column(length = 50)
     private int dni;
     private LocalDate fechaIngreso;
-    private DomicilioSalidaDto domicilioSalidaDto;
 
-    public PacienteSalidaDto() {
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "domicilio_id")
+    private Domicilio domicilio;
+
+    public Paciente() {
     }
 
-    public PacienteSalidaDto(Long id, String nombre, String apellido, int dni, LocalDate fechaIngreso, DomicilioSalidaDto domicilioSalidaDto) {
-        this.id = id;
+    public Paciente(String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
-        this.domicilioSalidaDto = domicilioSalidaDto;
+        this.domicilio = domicilio;
     }
 
     public Long getId() {
@@ -62,11 +72,13 @@ public class PacienteSalidaDto {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public DomicilioSalidaDto getDomicilioSalidaDto() {
-        return domicilioSalidaDto;
+    public Domicilio getDomicilio() {
+        return domicilio;
     }
 
-    public void setDomicilioSalidaDto(DomicilioSalidaDto domicilioSalidaDto) {
-        this.domicilioSalidaDto = domicilioSalidaDto;
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
     }
+
+
 }

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>CRUD App</title>
+</head>
+<body>
+    
+    <div class="flexRow">
+        <div class="flexCol" id="pacienteForm">
+            <h3>Paciente</h3>
+            
+            <h2>Formulario Crear Paciente</h2>
+            <form id="crearPacienteForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required><br>
+            
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required><br>
+            
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" required><br>
+            
+                <label for="fechaIngreso">Fecha de Ingreso:</label>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" pattern="\d{4}-\d{2}-\d{2}" required>
+                
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" required><br>
+            
+                <label for="numero">Número:</label>
+                <input type="text" id="numero" name="numero" required><br>
+            
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" required><br>
+            
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" required><br>
+            
+                <button type="button" onclick="crearPaciente()">Crear Paciente</button>
+                <button type="button" onclick="limpiarFormulario('crearPacienteForm')">Limpiar</button>
+            </form> 
+        
+            <h2>Consultar Paciente</h2>
+            <form id="consultarPacientesForm">
+                <label for="pacienteId">ID del Paciente:</label>
+                <input type="number" id="pacienteId" name="pacienteId" required><br>
+        
+                <button type="button" onclick="limpiarFormulario('consultarPacientesForm')">Limpiar</button>
+                <button type="button" onclick="consultarPacientePorId()">Consultar</button>
+                <button type="button" onclick="consultarPacientes()">Consultar Todos</button>
+                <button type="button" onclick="eliminarPacientePorId()">Eliminar</button>
+            </form>
+                
+            <h2>Formulario actualizar Paciente</h2>
+            <form id="actualizarPacienteForm">
+
+
+    <label for="actualizarPacienteId">ID del Paciente:</label>
+    <input type="number" id="actualizarPacienteId" name="actualizarPacienteId" required><br>
+    
+    <label for="actualizarNombrePaciente">Nombre:</label>
+    <input type="text" id="actualizarNombrePaciente" name="actualizarNombrePaciente" required><br>
+
+    <label for="actualizarApellidoPaciente">Apellido:</label>
+    <input type="text" id="actualizarApellidoPaciente" name="actualiarApellidoPaciente" required><br>
+
+    <label for="actualizarDniPaciente">DNI:</label>
+    <input type="text" id="actualizarDniPaciente" name="actualizarDniPaciente" required><br>
+
+    <label for="actualizarFechaIngresoPaciente">Fecha de Ingreso:</label>
+    <input type="date" id="actualizarFechaIngresoPaciente" name="actualizarFechaIngresoPaciente" pattern="\d{4}-\d{2}-\d{2}" required>
+    
+    <label for="actualizarCallePaciente">Calle:</label>
+    <input type="text" id="actualizarCallePaciente" name="actualizarCallePaciente" required><br>
+
+    <label for="actualizarNumeroPaciente">Número:</label>
+    <input type="text" id="actualizarNumeroPaciente" name="actualizarNumeroPaciente" required><br>
+
+    <label for=actualizarLocalidadPaciente">Localidad:</label>
+    <input type="text" id="actualizarLocalidadPaciente" name="actualizarLocalidadPaciente" required><br>
+
+    <label for="actualizarProvinciaPaciente">Provincia:</label>
+    <input type="text" id="actualizarProvinciaPaciente" name="actualizarProvinciaPaciente" required><br>
+
+    <button type="button" onclick="actualizarPaciente()">Actualizar Paciente</button>
+    <button type="button" onclick="limpiarFormulario('crearPacienteForm')">Limpiar</button>
+            </form> 
+        </div>
+        <div class="flexCol" id="odontologoForm">
+            <h3>Odontólogo</h3>
+
+            <h2>Formulario Crear Odontólogo</h2>
+            <form id="crearOdontologoForm">
+                <label for="crearNombreOdontologo">Nombre:</label>
+                <input type="text" id="crearNombreOdontologo" name="crearNombreOdontologo" required><br>
+            
+                <label for="crearApellidoOdontologo">Apellido:</label>
+                <input type="text" id="crearApellidoOdontologo" name="crearApellidoOdontologo" required><br>
+            
+                <label for="crearMatricula">Matrícula:</label>
+                <input type="text" id="crearMatricula" name="crearMatricula" required><br>
+            
+                <button type="button" onclick="crearOdontologo()">Crear Odontólogo</button>
+                <button type="button" onclick="limpiarFormulario('crearOdontologoForm')">Limpiar</button>
+            </form> 
+       
+            <h2>Consultar Odontólogos</h2>
+            <form id="consultarOdontologosForm">
+                <label for="odontologoId">ID del Odontólogo:</label>
+                <input type="number" id="odontologoId" name="odontologoId" required><br>
+        
+                <button type="button" onclick="limpiarFormulario('consultarOdontologosForm')">Limpiar</button>
+                <button type="button" onclick="consultarOdontologoPorId()">Consultar</button>
+                <button type="button" onclick="consultarOdontologos()">Consultar Todos</button>
+                <button type="button" onclick="eliminarOdontologoPorId()">Eliminar</button>
+        
+            </form>
+        
+        
+            <h2>Actualizar Odontólogos</h2>
+            <form id="actualizarOdontologoForm">
+                <label for="actualizarOdontologoId">ID del Odontólogo:</label>
+                <input type="number" id="actualizarOdontologoId" name="actualizarOdontologoId" required><br>
+        
+                <label for="actualizarNombreOdontologo">Nombre:</label>
+                <input type="text" id="actualizarNombreOdontologo" name="actualizarNombreOdontologo" required><br>
+            
+                <label for="actualizarApellidoOdontologo">Apellido:</label>
+                <input type="text" id="actualizarApellidoOdontologo" name="actualizarApellidoOdontologo" required><br>
+            
+                <label for="actualizarMatriculaOdontologo">Matrícula:</label>
+                <input type="text" id="actualizarMatriculaOdontologo" name="actualizarMatriculaOdontologo" required><br>
+            
+                <button type="button" onclick="updateOdontologo()">Actualizar Odontólogo</button>
+                <button type="button" onclick="limpiarFormulario('actualizarOdontologoForm')">Limpiar</button>
+        
+            </form>
+
+        </div>
+        <div class="flexCol" id="turnoForm">
+            <h3>Turno</h3>
+            <h2>Formulario Crear Turno</h2>
+            <form id="crearTurnoForm">
+                <label for="crearFechaTurno">Fecha:</label>
+                <input type="date" id="crearFechaTurno" name="crearFechaTurno" pattern="\d{4}-\d{2}-\d{2}" required>
+                            
+                <label for="turnoPacienteId">ID del Paciente:</label>
+                <input type="number" id="turnoPacienteId" name="turnoPacienteId" required><br>
+            
+                <label for="turnoOdontologoId">ID del Odontólogo:</label>
+                <input type="number" id="turnoOdontologoId" name="turnoOdontologoId" required><br>
+            
+                <button type="button" onclick="crearTurno()">Crear Turno</button>
+                <button type="button" onclick="limpiarFormulario('crearTurnoForm')">Limpiar</button>
+
+                <h2>Consultar Turnos</h2>
+                <form id="consultarTurno">
+                    <label for="turnoId">ID del Turno:</label>
+                    <input type="number" id="turnoId" name="turnoId" required><br>
+            
+                    <button type="button" onclick="limpiarFormulario('consultarTurno')">Limpiar</button>
+
+                    <button type="button" onclick="consultarTurnoPorId()">Consultar</button>
+                    <button type="button" onclick="consultarTurnos()">Consultar Todos</button>
+                    <button type="button" onclick="eliminarTurnoPorId()">Eliminar</button>
+            
+                    <div class="oculto visto cartelAvisoBueno"></div>
+
+                </form>
+                
+                <h2>Actualizar Turnos</h2>
+
+                <form id="actualizarTurnoForm">
+
+                    <label for="actualizarTurnoId">ID del Turno:</label>
+                    <input type="number" id="actualizarTurnoId" name="actualizarturnoId" required><br>
+
+
+
+
+
+
+
+
+                    <label for="actualizarFechaTurno">Fecha:</label>
+                    <input type="date" id="actualizarFechaTurno" name="actualizarFechaTurno" pattern="\d{4}-\d{2}-\d{2}" required>
+                                
+                    <label for="actualizarTurnoPacienteId">ID del Paciente:</label>
+                    <input type="number" id="actualizarTurnoPacienteId" name="actualizarTurnoPacienteId" required><br>
+                
+                    <label for="actualizarTurnoOdontologoId">ID del Odontólogo:</label>
+                    <input type="number" id="actualizarTurnoOdontologoId" name="actualizarTurnoOdontologoId" required><br>
+                
+                    <button type="button" onclick="updateTurno()">Actualizar Turno</button>
+                    <button type="button" onclick="limpiarFormulario('actualizarTurnoForm')">Limpiar</button>
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+   
+
+
+
+<script src="./js/paciente.js"></script>
+<script src="./js/odontologo.js"></script>
+<script src="./js/turno.js"></script>
+</body>
+</html>

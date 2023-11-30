@@ -1,12 +1,16 @@
-package com.clinicaOdontologica.dto.entrada.paciente;
+package com.clinicaOdontologica.dto.modificacion;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class DomicilioModificacionEntradaDto {
 
-public class DomicilioEntradaDto {
-
+    @NotNull(message = "Debe proveerse el id del domicilio que se desea modificar")
+    private Long id;
 
     @NotNull(message = "El campo calle no puede ser nulo")
     @NotBlank(message = "El campo calle no puede estar en blanco")
@@ -14,8 +18,8 @@ public class DomicilioEntradaDto {
 
     @NotNull(message = "El campo numero no puede ser nulo")
     @Digits(integer = 8, fraction = 0, message = "El número debe tener como máximo 8 dígitos")
-    //@Pattern(regexp = "\\d{1,8}", message = "El número debe tener como máximo 8 dígitos")
-    private int numero;
+
+    private Integer numero;
 
     @NotNull(message = "El campo localidad no puede ser nulo")
     @NotBlank(message = "El campo localidad no puede estar en blanco")
@@ -25,15 +29,23 @@ public class DomicilioEntradaDto {
     @NotBlank(message = "El campo provincia no puede estar en blanco")
     private String provincia;
 
-    public DomicilioEntradaDto() {
+    public DomicilioModificacionEntradaDto() {
     }
 
-
-    public DomicilioEntradaDto(String calle, int numero, String localidad, String provincia) {
+    public DomicilioModificacionEntradaDto(Long id, String calle, int numero, String localidad, String provincia) {
+        this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
         this.provincia = provincia;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCalle() {
