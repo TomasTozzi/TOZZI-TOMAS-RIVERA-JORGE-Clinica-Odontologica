@@ -42,7 +42,6 @@ function updateOdontologo() {
     nombre: document.getElementById("actualizarNombreOdontologo").value,
     apellido: document.getElementById("actualizarApellidoOdontologo").value,
   };
-  
   modificarOdontologo(odontologoNuevo);
 }
 
@@ -125,21 +124,36 @@ function consultarTodosOdontologos() {
 
 // Función modificarOdontologo con async/await
 function modificarOdontologo(odontologoNuevo) {
-  console.log("*****************************");
-    let id = odontologoNuevo.id;
-    console.log("Odontologo id: " + id);
+  let id = odontologoNuevo.id;
+  console.log("Odontologo id: " + id);
+ if(odontologoNuevo.id != null){
+  let options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(odontologoNuevo),
+    };
+    let url = "http://localhost:8081/odontologo/actualizar";
+    fetch(url, options)
+      .then((Response) => Response.json())
+      .then((data) => console.log(data.id));
+      console.log("Odontologo actualizado");
+      console.log(odontologoNuevo);
 
-   
-
+  } 
+  else {
+      console.log("No se pudo actualizar el odontologo");
+  }
 
       // Llamar a la función para enviar el odontólogo modificado
-  enviarModificacionOdontologo(odontologoNuevo);
+ // enviarModificacionOdontologo(odontologoNuevo);
 
 }
 
 
 
-function enviarModificacionOdontologo(odontologoNuevo) {
+/*function enviarModificacionOdontologo(odontologoNuevo) {
   let options = {
     method: "UPDATE",
     headers: {
@@ -152,4 +166,4 @@ function enviarModificacionOdontologo(odontologoNuevo) {
   fetch(url, options)
     .then((Response) => Response.json())
     .then((data) => console.log(data.id));
-}
+}*/
