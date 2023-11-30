@@ -42,6 +42,7 @@ function updateOdontologo() {
     nombre: document.getElementById("actualizarNombreOdontologo").value,
     apellido: document.getElementById("actualizarApellidoOdontologo").value,
   };
+  
   modificarOdontologo(odontologoNuevo);
 }
 
@@ -90,21 +91,17 @@ function eliminarOdontologo() {
 
 // GET ODONTOLOGO X ID
 function consultarOdontologo(id) {
-  let odontologoId = id;
   console.log("dentro de consultar odontologo");
-  let options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  console.log("ID: " + id);
 
-  let url = `http://localhost:8081/odontologo/${odontologoId}`;
-
-  fetch(url, options)
+  let url = `http://localhost:8081/odontologo/${id}`;
+  let datos = fetch(url)
     .then((Response) => Response.json())
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
+
+  console.log(datos);
+
 }
 
 // GET TODOS LOS ODONTOLOGOS
@@ -123,16 +120,36 @@ function consultarTodosOdontologos() {
     .then((data) => console.log(data));
 }
 
-function modificarOdontologo(odontologoNuevo) {
-  let odontologoId = odontologoNuevo.id;
-  console.log(odontologoId + "odonto id");
 
-  let odonto = consultarOdontologo(odontologoId);
-  console.log("Retorno" + odonto);
-  if (odonto == undefined) {
-    console.log("No se encontró el odontólogo");
-  } else {
-    console.log("Se modifica el odonto");
-    enviarOdontologo(odontologoNuevo);
-  }
+
+
+// Función modificarOdontologo con async/await
+function modificarOdontologo(odontologoNuevo) {
+  console.log("*****************************");
+    let id = odontologoNuevo.id;
+    console.log("Odontologo id: " + id);
+
+   
+
+
+      // Llamar a la función para enviar el odontólogo modificado
+  enviarModificacionOdontologo(odontologoNuevo);
+
+}
+
+
+
+function enviarModificacionOdontologo(odontologoNuevo) {
+  let options = {
+    method: "UPDATE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(odontologoNuevo),
+  };
+
+  let url = "http://localhost:8081/odontologo/actualizar";
+  fetch(url, options)
+    .then((Response) => Response.json())
+    .then((data) => console.log(data.id));
 }

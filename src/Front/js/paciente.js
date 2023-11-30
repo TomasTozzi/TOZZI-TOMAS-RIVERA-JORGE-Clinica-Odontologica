@@ -41,7 +41,7 @@ function consultarPacientePorId() {
 
 // Consultar todos los Odontologos.
 function consultarPacientes() {
-  console.log("ConsultarTodosOdontologos");
+  console.log("ConsultarTodosPacientes");
   consultarTodosPacientes();
 }
 
@@ -151,8 +151,7 @@ function modificarPaciente(pacienteNuevo) {
   let pacienteId = pacienteNuevo.id;
   console.log(pacienteId + "paciente id");
   
-if (consultarPaciente(pacienteId) != null) {
-    console.log("Se encontro paciente");
+    if (consultarPaciente(pacienteId) != null) {
     let options = {
       method: "PUT",
       headers: {
@@ -165,24 +164,16 @@ if (consultarPaciente(pacienteId) != null) {
 
     fetch(url, options)
       .then((Response) => Response.json())
-      .then((data) => console.log(data))
+      .then((data) => (data))
       .catch((error) =>
         console.log("Hubo un error en la consultar. Por favor verifica el id")
       );
       return pacienteId;
 
 
-
-
-
-
-
-
-
   } else {
     console.log("No se encontro paciente");
-    
-  }
+      }
 
 
 

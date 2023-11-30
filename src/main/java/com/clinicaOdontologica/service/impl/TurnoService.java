@@ -37,7 +37,7 @@ public class TurnoService implements ITurnoService {
 
 
     @Override
-    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException {
+    public TurnoSalidaDto registrarTurno(TurnoEntradaDto turnoEntradaDto) throws BadRequestException, ResourceNotFoundException {
             LOGGER.info("TurnoEntradaDto: " + JsonPrinter.toString(turnoEntradaDto));
 
             TurnoSalidaDto turnoSalidaDto;
@@ -58,12 +58,6 @@ public class TurnoService implements ITurnoService {
             return turnoSalidaDto;
         }
 
-
-
-
-
-    //fin registrar turno
-
     @Override
     public List<TurnoSalidaDto> listarTurnos() {
         List<TurnoSalidaDto> turnosSalidaDto = turnoRepository.findAll()
@@ -75,7 +69,6 @@ public class TurnoService implements ITurnoService {
             LOGGER.info("Listado de todos los turnos: {}", JsonPrinter.toString(turnosSalidaDto));
         return turnosSalidaDto;
     }
-
 
     @Override
     public TurnoSalidaDto actualizarTurno(TurnoModificacionEntradaDto turno) throws ResourceNotFoundException {
@@ -128,9 +121,5 @@ public class TurnoService implements ITurnoService {
         modelMapper.typeMap(TurnoEntradaDto.class, Turno.class).addMappings(mapper -> mapper.map(TurnoEntradaDto::getPaciente, Turno::setPaciente)).addMappings(mapper -> mapper.map(TurnoEntradaDto::getOdontologo, Turno::setOdontologo));
         modelMapper.typeMap(Turno.class, TurnoSalidaDto.class).addMappings(mapper -> mapper.map(Turno::getPaciente, TurnoSalidaDto::setPaciente)).addMappings(mapper -> mapper.map(Turno::getOdontologo, TurnoSalidaDto::setOdontologo));
         modelMapper.typeMap(TurnoModificacionEntradaDto.class, Turno.class).addMappings(mapper -> mapper.map(TurnoModificacionEntradaDto::getPaciente, Turno::setPaciente)).addMappings(mapper -> mapper.map(TurnoModificacionEntradaDto::getOdontologo, Turno::setOdontologo));
-
-
     }
-
-
 }

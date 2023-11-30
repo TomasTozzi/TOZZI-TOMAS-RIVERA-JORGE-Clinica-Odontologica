@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ITurnoService {
 
-    TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException;
+    TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException, ResourceNotFoundException;
 
     List<TurnoSalidaDto> listarTurnos();
 

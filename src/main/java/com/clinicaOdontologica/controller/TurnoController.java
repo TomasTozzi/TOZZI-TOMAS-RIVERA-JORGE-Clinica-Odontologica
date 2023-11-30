@@ -26,7 +26,7 @@ public class TurnoController {
 
     //POST
     @PostMapping("/registrar")
-    public ResponseEntity<TurnoSalidaDto> registrarTurno(@RequestBody @Valid TurnoEntradaDto turno) throws BadRequestException {
+    public ResponseEntity<TurnoSalidaDto> registrarTurno(@RequestBody @Valid TurnoEntradaDto turno) throws BadRequestException, ResourceNotFoundException {
         return new ResponseEntity<>(turnoService.registrarTurno(turno), HttpStatus.CREATED);
     }
 
