@@ -143,9 +143,16 @@
             <h3>Turno</h3>
             <h2>Formulario Crear Turno</h2>
             <form id="crearTurnoForm">
-                <label for="crearFechaTurno">Fecha:</label>
-                <input type="date" id="crearFechaTurno" name="crearFechaTurno" pattern="\d{4}-\d{2}-\d{2}" required>
-                            
+
+
+                <label for="fecha">Selecciona una fecha (YYYY-MM-DD):</label>
+                <input type="date" id="fecha" name="fecha" required>
+                <br>
+
+                <label for="hora">Selecciona una hora (HH:MM):</label>
+                <input type="time" id="hora" name="hora" required>
+                <br>
+
                 <label for="turnoPacienteId">ID del Paciente:</label>
                 <input type="number" id="turnoPacienteId" name="turnoPacienteId" required><br>
             
@@ -179,13 +186,13 @@
 
 
 
-
-
-
-
-
-                    <label for="actualizarFechaTurno">Fecha:</label>
-                    <input type="date" id="actualizarFechaTurno" name="actualizarFechaTurno" pattern="\d{4}-\d{2}-\d{2}" required>
+                    <label for="fecha">Selecciona una fecha (YYYY-MM-DD):</label>
+                    <input type="date" id="actualizarFecha" name="actualizarFecha" required>
+                    <br>
+    
+                    <label for="hora">Selecciona una hora (HH:MM):</label>
+                    <input type="time" id="actualizarHora" name="actualizarHora" required>
+                    <br>
                                 
                     <label for="actualizarTurnoPacienteId">ID del Paciente:</label>
                     <input type="number" id="actualizarTurnoPacienteId" name="actualizarTurnoPacienteId" required><br>

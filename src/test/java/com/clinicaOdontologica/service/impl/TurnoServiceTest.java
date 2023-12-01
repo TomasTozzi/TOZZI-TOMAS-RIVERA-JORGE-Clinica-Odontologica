@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,7 +39,7 @@ class TurnoServiceTest {
         OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
         OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
 
-        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDateTime.of(2025, 12,12,22,10,10), pacienteRetorno.getId(), odontologoRetorno.getId());
         TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
 
         assertNotNull(turnoRetorno.getId());
@@ -54,7 +55,7 @@ class TurnoServiceTest {
         OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
         OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
 
-        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDateTime.of(2025, 12,12,22,10,10), pacienteRetorno.getId(), odontologoRetorno.getId());
         TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
 
         turnoService.eliminarTurno(turnoRetorno.getId());
@@ -73,7 +74,7 @@ class TurnoServiceTest {
         OdontologoEntradaDto odontologoNuevo = new OdontologoEntradaDto("123456789", "Tomas", "Fernandez" );
         OdontologoSalidaDto odontologoRetorno = odontologoService.registrarOdontologo(odontologoNuevo);
 
-        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDate.of(2025, 12,12), pacienteRetorno.getId(), odontologoRetorno.getId());
+        TurnoEntradaDto turnoNuevo = new TurnoEntradaDto(LocalDateTime.of(2025, 12,12,22,10,10), pacienteRetorno.getId(), odontologoRetorno.getId());
         TurnoSalidaDto turnoRetorno = turnoService.registrarTurno(turnoNuevo);
 
         assertFalse(turnoService.listarTurnos().isEmpty());

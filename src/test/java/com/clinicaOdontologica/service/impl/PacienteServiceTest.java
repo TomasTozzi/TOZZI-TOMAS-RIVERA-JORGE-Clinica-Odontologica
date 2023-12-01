@@ -42,7 +42,7 @@ class PacienteServiceTest {
         pacienteService.registrarPaciente(pacienteNuevo);
 
         try {
-            pacienteService.eliminarPaciente(2L);
+            pacienteService.eliminarPaciente(1L);
         } catch (Exception exception) {
                 exception.printStackTrace();
         }

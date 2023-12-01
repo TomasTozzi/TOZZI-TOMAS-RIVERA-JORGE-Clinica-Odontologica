@@ -2,6 +2,7 @@ package com.clinicaOdontologica.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TURNOS")
@@ -11,7 +12,7 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate fechaYHora;
+    private LocalDateTime fechaYHora;
 
 
     @JoinColumn(name = "odontologo_id")
@@ -25,7 +26,7 @@ public class Turno {
     public Turno() {
     }
 
-    public Turno(Long id, LocalDate fechaYHora, Long idOdontologo, Long idPaciente) {
+    public Turno(Long id, LocalDateTime fechaYHora, Long idOdontologo, Long idPaciente) {
         this.id = id;
         this.fechaYHora = fechaYHora;
         this.Odontologo = idOdontologo;
@@ -40,11 +41,11 @@ public class Turno {
         this.id = id;
     }
 
-    public LocalDate getFechaYHora() {
+    public LocalDateTime getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(LocalDate fechaYHora) {
+    public void setFechaYHora(LocalDateTime fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 

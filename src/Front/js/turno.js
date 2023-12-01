@@ -4,18 +4,26 @@ window.onload = function () {
   
   
   // Funciones Odontologo
-  // Crear Odontologo.
+
   function crearTurno() {
+ 
+    const fecha = document.getElementById('fecha').value;
+    const hora = document.getElementById('hora').value;
+
+    const fechaYHora = fecha + ' ' + hora;
+
+    alert("turno creado correctamente")
     let turnoNuevo = {
-        fechaYHora: document.getElementById("crearFechaTurno").value,
+        fechaYHora: fechaYHora,
         paciente: document.getElementById("turnoPacienteId").value,
         odontologo: document.getElementById("turnoOdontologoId").value,
-
     };
     enviarTurno(turnoNuevo);
     console.log("Turno creado");
     console.log(turnoNuevo);
+
   }
+
   // Eliminar Odontologo.
   function eliminarTurnoPorId() {
     console.log("Eliminar Odontologo");
@@ -41,12 +49,18 @@ window.onload = function () {
   
   // Actualizar Odontologo.
   function updateTurno() {
-    console.log("Actualizar Odontologo");
+    console.log("Actualizar Turno");
+    const fecha = document.getElementById('actualizarFecha').value;
+    const hora = document.getElementById('actualizarHora').value;
+
+    const fechaYHora = fecha + ' ' + hora;
+
+    alert("turno creado correctamente")
     let turnoNuevo = {
-      id: document.getElementById("actualizarTurnoId").value,
-      fechaYHora: document.getElementById("actualizarFechaTurno").value,
-      paciente: document.getElementById("actualizarTurnoPacienteId").value,
-      odontologo: document.getElementById("actualizarTurnoOdontologoId").value,
+        id: document.getElementById("actualizarTurnoId").value,
+        fechaYHora: fechaYHora,
+        paciente: document.getElementById("turnoPacienteId").value,
+        odontologo: document.getElementById("turnoOdontologoId").value,
     };
     modificarTurno(turnoNuevo);
   }
@@ -110,7 +124,7 @@ function limpiarFormulario(formId) {
     let url = `http://localhost:8081/turnos/${id}`;
 
     
-    fetch(url, options)
+    fetch(url)
     .then((Response) => Response.json())
     .then((data) =>  console.log(data))
     .catch((error) => console.log(error));
