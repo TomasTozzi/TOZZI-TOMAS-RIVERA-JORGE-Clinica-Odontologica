@@ -4,11 +4,12 @@ import com.clinicaOdontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.clinicaOdontologica.dto.salida.paciente.PacienteSalidaDto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
     private Long id;
 
-    private LocalDate fechaYHora;
+    private LocalDateTime fechaYHora;
 
 
     private Long odontologo;
@@ -18,7 +19,7 @@ public class TurnoSalidaDto {
     public TurnoSalidaDto() {
     }
 
-    public TurnoSalidaDto(LocalDate fechaYHora, Long odontologo, Long paciente) {
+    public TurnoSalidaDto(LocalDateTime fechaYHora, Long odontologo, Long paciente) {
 
         this.fechaYHora = fechaYHora;
         this.odontologo = odontologo;
@@ -33,11 +34,11 @@ public class TurnoSalidaDto {
         this.id = id;
     }
 
-    public LocalDate getFechaYHora() {
+    public LocalDateTime getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(LocalDate fechaYHora) {
+    public void setFechaYHora(LocalDateTime fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
